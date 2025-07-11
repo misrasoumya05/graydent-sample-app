@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gradyent-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gradyent-app
+  template:
+    metadata:
+      labels:
+        app: gradyent-app
+    spec:
+      containers:
+        - name: app
+          image: gradyent/sample-app:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20

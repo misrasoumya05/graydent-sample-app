@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gradyent-service
+spec:
+  type: ClusterIP
+  selector:
+    app: gradyent-app
+  ports:
+    - port: 80
+      targetPort: 8080
